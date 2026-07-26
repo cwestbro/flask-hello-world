@@ -70,4 +70,14 @@ def db_select():
     response_string += "</table>"
     return response_string
 
+@app.route("/db_drop")
+def db_drop():
+    conn = psycopg2.connect("postgresql://cwestbro_render_db_user:Ntm8A5ZPFbbsqbzNMTFyOaxRYBcoONFc@dpg-d9ijv6cm0tmc73cu4030-a/cwestbro_render_db")
+    cur = conn.cursor()
+    cur.execute("""
+    DROP TABLE Basketball;
+    """)
+    conn.commit()
+    conn.close()
+    return "Basketball table successfully dropped"
 
